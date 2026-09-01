@@ -1,5 +1,6 @@
 package bcc.furb.br.controller;
 
+import bcc.furb.br.services.Token;
 import bcc.furb.br.view.CompilerFrame;
 import java.io.File;
 import java.io.IOException;
@@ -83,10 +84,26 @@ public class CompilerController {
     }
 
     public void handleCompile() {
-        view.setConsoleMessage("compilação de programas ainda não foi implementada");
+        Lexico lexico = new Lexico();
+        lexico.setInput(view.getEditorText());
+        
+        try { 
+            Token t = null;
+
+            while ( (t = lexico.nextToken()) != null ) { 
+                StringBuilder stringBuilder= new StringBuilder();
+
+                stringBuilder.append((t.getLexeme() + " - " + t.getId() + " - " + t.getPosition()));
+
+            } 
+        }  catch ( LexicalError e ) { 
+            
+        }
     }
 
     public void handleTeam() {
         view.setConsoleMessage("Equipe de desenvolvimento:\n- Cauã Bertolini\n- Cesar Augusto Floriani\n- Eduarda Mazureck");
     }
+
+
 }
