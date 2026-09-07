@@ -1,3 +1,4 @@
+package bcc.furb.br.services;
 public interface ScannerConstants
 {
     int[] SCANNER_TABLE_INDEXES = 
@@ -1283,7 +1284,7 @@ public interface ScannerConstants
 
     String[] SCANNER_ERROR =
     {
-        "Caractere não esperado",
+        "Caractere nï¿½o esperado",
         "",
         "Erro identificando constString",
         "Erro identificando <ignorar>",

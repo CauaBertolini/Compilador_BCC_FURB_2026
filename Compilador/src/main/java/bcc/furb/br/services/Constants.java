@@ -1,3 +1,4 @@
+package bcc.furb.br.services;
 public interface Constants extends ScannerConstants
 {
     int EPSILON  = 0;

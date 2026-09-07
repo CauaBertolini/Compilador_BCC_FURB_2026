@@ -1,3 +1,4 @@
+package bcc.furb.br.services;
 public class AnalysisError extends Exception
 {
     private int position;
