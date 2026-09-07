@@ -1,3 +1,4 @@
+package bcc.furb.br.services;
 public class SyntaticError extends AnalysisError
 {
     public SyntaticError(String msg, int position)

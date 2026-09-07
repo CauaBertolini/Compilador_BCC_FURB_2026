@@ -1,3 +1,4 @@
+package bcc.furb.br.services;
 public class SemanticError extends AnalysisError
 {
     public SemanticError(String msg, int position)

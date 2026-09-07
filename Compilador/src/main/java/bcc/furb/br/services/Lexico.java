@@ -1,3 +1,4 @@
+package bcc.furb.br.services;
 public class Lexico implements Constants
 {
     private int position;

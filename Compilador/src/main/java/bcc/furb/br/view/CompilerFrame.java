@@ -17,50 +17,49 @@ public class CompilerFrame extends JFrame {
     public CompilerFrame() {
         super("Compilador - BCC FURB");
 
-        // 1. General Setup: 1500x800 fixed size, minimize and close allowed
+
         setSize(1500, 800);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Center on screen
+        setLocationRelativeTo(null);
 
         setLayout(new BorderLayout());
 
-        // Create Text Areas
+
         editorTextArea = new JTextArea();
         messageTextArea = new JTextArea();
 
-        // 2. Setup Monospaced Fonts for alignment and code editing
+
         Font codeFont = new Font("Consolas", Font.PLAIN, 14);
         editorTextArea.setFont(codeFont);
         messageTextArea.setFont(codeFont);
 
-        // Setup Margins and Borders
-        editorTextArea.setMargin(new Insets(5, 5, 5, 5));
-        editorTextArea.setLineWrap(false); // No line wrapping
 
-        // Integrate the NumberedBorder on the editorTextArea
+        editorTextArea.setMargin(new Insets(5, 5, 5, 5));
+        editorTextArea.setLineWrap(false);
+
+
         editorTextArea.setBorder(new NumberedBorder());
 
-        messageTextArea.setEditable(false); // Message area is read-only
+        messageTextArea.setEditable(false);
         messageTextArea.setMargin(new Insets(5, 5, 5, 5));
 
-        // 3. Editor scroll pane (vertical & horizontal scrollbars always visible)
         JScrollPane editorScrollPane = new JScrollPane(editorTextArea);
         editorScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         editorScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-        // 4. Message scroll pane (vertical & horizontal scrollbars always visible)
+
         JScrollPane messageScrollPane = new JScrollPane(messageTextArea);
         messageScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         messageScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-        // 5. Vertical split pane between editor and message area
+
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, editorScrollPane, messageScrollPane);
-        splitPane.setDividerLocation(450); // Set initial divider location
+        splitPane.setDividerLocation(450);
         splitPane.setContinuousLayout(true);
         add(splitPane, BorderLayout.CENTER);
 
-        // 6. Define Actions (Delegated to Controller)
+
         Action newAction = new AbstractAction("novo [ctrl-n]") {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,6 +68,7 @@ public class CompilerFrame extends JFrame {
                 }
             }
         };
+        newAction.putValue(Action.SMALL_ICON, carregarIcone("/icons/novo.png"));
 
         Action openAction = new AbstractAction("abrir [ctrl-o]") {
             @Override
@@ -78,6 +78,7 @@ public class CompilerFrame extends JFrame {
                 }
             }
         };
+        openAction.putValue(Action.SMALL_ICON, carregarIcone("/icons/abrir.png"));
 
         Action saveAction = new AbstractAction("salvar [ctrl-s]") {
             @Override
@@ -87,6 +88,7 @@ public class CompilerFrame extends JFrame {
                 }
             }
         };
+        saveAction.putValue(Action.SMALL_ICON, carregarIcone("/icons/salvar.png"));
 
         Action copyAction = new AbstractAction("copiar [ctrl-c]") {
             @Override
@@ -94,6 +96,7 @@ public class CompilerFrame extends JFrame {
                 editorTextArea.copy();
             }
         };
+        copyAction.putValue(Action.SMALL_ICON, carregarIcone("/icons/copiar.png"));
 
         Action pasteAction = new AbstractAction("colar [ctrl-v]") {
             @Override
@@ -101,6 +104,7 @@ public class CompilerFrame extends JFrame {
                 editorTextArea.paste();
             }
         };
+        pasteAction.putValue(Action.SMALL_ICON, carregarIcone("/icons/colar.png"));
 
         Action cutAction = new AbstractAction("recortar [ctrl-x]") {
             @Override
@@ -108,6 +112,7 @@ public class CompilerFrame extends JFrame {
                 editorTextArea.cut();
             }
         };
+        cutAction.putValue(Action.SMALL_ICON, carregarIcone("/icons/cortar.png"));
 
         Action compileAction = new AbstractAction("compilar [F7]") {
             @Override
@@ -117,6 +122,7 @@ public class CompilerFrame extends JFrame {
                 }
             }
         };
+        compileAction.putValue(Action.SMALL_ICON, carregarIcone("/icons/compilar.png"));
 
         Action teamAction = new AbstractAction("equipe [F1]") {
             @Override
@@ -126,8 +132,9 @@ public class CompilerFrame extends JFrame {
                 }
             }
         };
+        teamAction.putValue(Action.SMALL_ICON, carregarIcone("/icons/equipe.png"));
 
-        // 7. Register Global Keyboard Shortcuts (KeyBindings)
+
         registerKeyboardShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK), "newAction",
                 newAction);
         registerKeyboardShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK), "openAction",
@@ -143,13 +150,13 @@ public class CompilerFrame extends JFrame {
         registerKeyboardShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "compileAction", compileAction);
         registerKeyboardShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0), "teamAction", teamAction);
 
-        // 8. Toolbar (Left Side) - 150 x n (filled vertically)
+
         JPanel toolbarPanel = new JPanel();
         toolbarPanel.setLayout(new BoxLayout(toolbarPanel, BoxLayout.Y_AXIS));
         toolbarPanel.setPreferredSize(new Dimension(150, 800));
         toolbarPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.LIGHT_GRAY));
 
-        toolbarPanel.add(Box.createVerticalStrut(10)); // Top margin spacing
+        toolbarPanel.add(Box.createVerticalStrut(10));
 
         JButton[] buttons = {
                 new JButton(newAction),
@@ -169,16 +176,16 @@ public class CompilerFrame extends JFrame {
             btn.setMinimumSize(new Dimension(140, 45));
             btn.setHorizontalAlignment(SwingConstants.LEFT);
             btn.setIconTextGap(8);
-            btn.setFocusable(false); // Keep focus on the text editor
+            btn.setFocusable(false);
             btn.setMargin(new Insets(2, 5, 2, 5));
             toolbarPanel.add(btn);
             toolbarPanel.add(Box.createVerticalStrut(5));
         }
 
-        toolbarPanel.add(Box.createVerticalGlue()); // Push everything up
+        toolbarPanel.add(Box.createVerticalGlue());
         add(toolbarPanel, BorderLayout.WEST);
 
-        // 9. Status Bar (Bottom) - m x 25
+
         JPanel statusBarPanel = new JPanel(new BorderLayout());
         statusBarPanel.setPreferredSize(new Dimension(1500, 25));
         statusBarPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
@@ -195,7 +202,7 @@ public class CompilerFrame extends JFrame {
         root.getActionMap().put(actionName, action);
     }
 
-    // --- Semantic Getters & Setters ---
+
 
     public void setController(CompilerController controller) {
         this.controller = controller;
@@ -223,5 +230,15 @@ public class CompilerFrame extends JFrame {
 
     public void showErrorDialog(String title, String message) {
         JOptionPane.showMessageDialog(this, message, title, JOptionPane.ERROR_MESSAGE);
+    }
+
+    private ImageIcon carregarIcone(String caminho) {
+        java.net.URL imgURL = getClass().getResource(caminho);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL);
+        } else {
+            System.err.println("Ícone não encontrado: " + caminho);
+            return null;
+        }
     }
 }

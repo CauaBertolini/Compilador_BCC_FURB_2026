@@ -1,6 +1,8 @@
 package bcc.furb.br.controller;
 
-import bcc.furb.br.services.Token;
+import bcc.furb.br.services.*;
+import java.util.ArrayList;
+import java.util.List;
 import bcc.furb.br.view.CompilerFrame;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +19,38 @@ public class CompilerController {
     public CompilerController(CompilerFrame view) {
         this.view = view;
     }
+
+    private int calcularLinha(String texto, int posicao) {
+        int linha = 1;
+        for (int i = 0; i < posicao && i < texto.length(); i++){
+            if (texto.charAt(i) == '\n') {
+                linha++;
+            }
+        }
+        return linha;
+    }
+
+    private String getNomeClasse(int id) {
+        if (id == Constants.t_palavraReservada || (id >= Constants.t_and && id <= Constants.t_while)){
+            return "palavra reservada";
+        }
+        return switch (id) {
+            case Constants.t_idInt -> "identificador de int";
+            case Constants.t_idFloat -> "identificador de float";
+            case Constants.t_idString -> "identificador de string";
+            case Constants.t_idBool -> "identificador de bool";
+            case Constants.t_constInt -> "constante int";
+            case Constants.t_constFloat -> "constante float";
+            case Constants.t_constString -> "constante string";
+            default -> {
+                if (id >= Constants.t_TOKEN_22 && id <= Constants.t_TOKEN_39) {
+                    yield "símbolo especial";
+                }
+                yield "desconhecido";
+            }
+        };
+    }
+
 
     public void handleNew() {
         currentFile = null;
@@ -84,20 +118,38 @@ public class CompilerController {
     }
 
     public void handleCompile() {
+        String input = view.getEditorText();
         Lexico lexico = new Lexico();
-        lexico.setInput(view.getEditorText());
-        
+        lexico.setInput(input);
+
+        List<Token> tokens = new ArrayList<>();
+
+
         try { 
             Token t = null;
+        while ((t= lexico.nextToken()) != null) {
+            tokens.add(t);
+            }
 
-            while ( (t = lexico.nextToken()) != null ) { 
-                StringBuilder stringBuilder= new StringBuilder();
-
-                stringBuilder.append((t.getLexeme() + " - " + t.getId() + " - " + t.getPosition()));
-
-            } 
-        }  catch ( LexicalError e ) { 
-            
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Token token : tokens) {
+            int linha = calcularLinha(input, token.getPosition());
+            String classe = getNomeClasse(token.getId());
+            stringBuilder.append(linha)
+                    .append(" - ")
+                    .append(classe)
+                    .append(" - ")
+                    .append(token.getLexeme())
+                    .append("\n");
+        }
+        view.setConsoleMessage(stringBuilder.toString());
+        }  catch ( LexicalError e ) {
+            int linhaErro = calcularLinha(input, e.getPosition());
+            String mensagem = e.getMessage();
+            if (mensagem == null || mensagem.trim().isEmpty()) {
+                mensagem = "erro léxico";
+            }
+            view.setConsoleMessage("linha " + linhaErro + ": " + mensagem);
         }
     }
 
