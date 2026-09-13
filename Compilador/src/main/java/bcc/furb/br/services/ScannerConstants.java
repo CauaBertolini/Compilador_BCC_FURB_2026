@@ -1281,47 +1281,47 @@ public interface ScannerConstants {
     int[] SPECIAL_CASES_VALUES = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 };
 
     String[] SCANNER_ERROR = {
-            "Caractere não esperado",
-            "",
-            "Erro identificando constString",
-            "Erro identificando <ignorar>",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "Erro identificando constFloat",
-            "",
-            "",
-            "Erro identificando palavraReservada",
-            "Erro identificando idBool",
-            "Erro identificando idFloat",
-            "Erro identificando idInt",
-            "Erro identificando idString",
-            "",
-            "",
-            "",
-            "",
-            ""
+            "símbolo inválido",                        // 0  - caractere inicial não reconhecido
+            "",                                         // 1
+            "constante_string inválida",                // 2  - string não finalizada / malformada
+            "comentário inválido ou não finalizado",     // 3  - comentário de bloco não finalizado
+            "",                                         // 4
+            "",                                         // 5
+            "",                                         // 6
+            "",                                         // 7
+            "",                                         // 8
+            "",                                         // 9
+            "",                                         // 10
+            "",                                         // 11
+            "",                                         // 12
+            "",                                         // 13
+            "",                                         // 14
+            "",                                         // 15
+            "",                                         // 16
+            "",                                         // 17
+            "",                                         // 18
+            "",                                         // 19
+            "",                                         // 20
+            "",                                         // 21
+            "",                                         // 22
+            "",                                         // 23
+            "",                                         // 24
+            "",                                         // 25
+            "",                                         // 26
+            "",                                         // 27
+            "constante_float inválida",                 // 28 - número seguido de vírgula sem dígitos depois
+            "",                                         // 29
+            "",                                         // 30
+            "palavra reservada inválida",               // 31 - sequência de letras não é palavra reservada válida
+            "identificador inválido",                   // 32 - idBool malformado
+            "identificador inválido",                   // 33 - idFloat malformado
+            "identificador inválido",                   // 34 - idInt malformado
+            "identificador inválido",                   // 35 - idString malformado
+            "",                                         // 36
+            "",                                         // 37
+            "",                                         // 38
+            "",                                         // 39
+            ""                                          // 40
     };
 
 }
