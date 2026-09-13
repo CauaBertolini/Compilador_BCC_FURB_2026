@@ -108,23 +108,22 @@ public class CompilerController {
             }
 
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(String.format("%-10s | %-25s | %s\n", "LINHA", "CLASSE", "LEXEMA"));
-            stringBuilder.append("----------------------------------------------------------------\n");
+            stringBuilder.append(String.format("%-10s %-20s %s\n", "linha", "classe", "lexema"));
             for (Token token : tokens) {
                 int linha = calcularLinha(input, token.getPosition());
                 String classe = getNomeClasse(token.getId());
-                stringBuilder.append(String.format("%-10d | %-25s | %s\n", linha, classe, token.getLexeme()));
+                stringBuilder.append(String.format("%-10d %-20s %s\n", linha, classe, token.getLexeme()));
             }
-            stringBuilder.append("\nPrograma compilado com sucesso!");
+            stringBuilder.append("\nprograma compilado com sucesso");
             writeInConsole(stringBuilder.toString());
 
         } catch (LexicalError e) {
             int linhaErro = calcularLinha(input, e.getPosition());
-            String mensagem = e.getMessage();
-            if (mensagem == null || mensagem.trim().isEmpty()) {
-                mensagem = "erro léxico";
-            }
-            writeInConsole("linha " + linhaErro + ": " + mensagem);
+            String textoErro;
+
+            textoErro = "linha " + linhaErro + ": " + e.getLexeme() + " " + e.getMessage();
+
+            writeInConsole(textoErro);
         }
     }
 
@@ -140,21 +139,18 @@ public class CompilerController {
 
     private String getNomeClasse(int id) {
         if (id == Constants.t_palavraReservada || (id >= Constants.t_and && id <= Constants.t_while)) {
-            return "Palavra reservada";
+            return "palavra reservada";
         }
         return switch (id) {
-            case Constants.t_idInt -> "Identificador de int";
-            case Constants.t_idFloat -> "Identificador de float";
-            case Constants.t_idString -> "Identificador de string";
-            case Constants.t_idBool -> "Identificador de bool";
-            case Constants.t_constInt -> "Constante int";
-            case Constants.t_constFloat -> "Constante float";
-            case Constants.t_constString -> "Constante string";
+            case Constants.t_idInt, Constants.t_idFloat, Constants.t_idString, Constants.t_idBool -> "identificador";
+            case Constants.t_constInt -> "constante_int";
+            case Constants.t_constFloat -> "constante_float";
+            case Constants.t_constString -> "constante_string";
             default -> {
                 if (id >= Constants.t_TOKEN_22 && id <= Constants.t_TOKEN_39) {
-                    yield "Símbolo especial";
+                    yield "símbolo especial";
                 }
-                yield "Desconhecido";
+                yield "desconhecido";
             }
         };
     }
