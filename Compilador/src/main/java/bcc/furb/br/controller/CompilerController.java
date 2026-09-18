@@ -104,27 +104,57 @@ public class CompilerController {
         try {
             Token t = null;
             while ((t = lexico.nextToken()) != null) {
+                if (t.getId() == Constants.t_palavraReservada) {
+                    throw new LexicalError("palavra reservada inválida", t.getPosition());
+                }
                 tokens.add(t);
             }
 
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(String.format("%-10s %-20s %s\n", "linha", "classe", "lexema"));
+            stringBuilder.append(String.format("%-15s %-40s %s\n", "linha", "classe", "lexema"));
             for (Token token : tokens) {
                 int linha = calcularLinha(input, token.getPosition());
                 String classe = getNomeClasse(token.getId());
-                stringBuilder.append(String.format("%-10d %-20s %s\n", linha, classe, token.getLexeme()));
+                stringBuilder.append(String.format("%-15d %-40s %s\n", linha, classe, token.getLexeme()));
             }
             stringBuilder.append("\nprograma compilado com sucesso");
             writeInConsole(stringBuilder.toString());
 
         } catch (LexicalError e) {
             int linhaErro = calcularLinha(input, e.getPosition());
+            String msg = e.getMessage();
             String textoErro;
 
-            textoErro = "linha " + linhaErro + ": " + e.getLexeme() + " " + e.getMessage();
+            if ("símbolo inválido".equals(msg)) {
+                String simbolo = extrairSimbolo(input, e.getPosition());
+                textoErro = "linha " + linhaErro + ": " + simbolo + " " + msg;
+            } else if ("palavra reservada inválida".equals(msg)) {
+                String palavra = extrairPalavra(input, e.getPosition());
+                textoErro = "linha " + linhaErro + ": " + palavra + " " + msg;
+            } else {
+                textoErro = "linha " + linhaErro + ": " + msg;
+            }
 
             writeInConsole(textoErro);
         }
+    }
+
+    private String extrairSimbolo(String texto, int posicao) {
+        if (posicao >= 0 && posicao < texto.length()) {
+            return String.valueOf(texto.charAt(posicao));
+        }
+        return "";
+    }
+
+    private String extrairPalavra(String texto, int posicao) {
+        if (posicao < 0 || posicao >= texto.length()) {
+            return "";
+        }
+        int fim = posicao;
+        while (fim < texto.length() && (Character.isLetterOrDigit(texto.charAt(fim)) || texto.charAt(fim) == '_')) {
+            fim++;
+        }
+        return texto.substring(posicao, fim);
     }
 
     private int calcularLinha(String texto, int posicao) {
@@ -138,7 +168,7 @@ public class CompilerController {
     }
 
     private String getNomeClasse(int id) {
-        if (id == Constants.t_palavraReservada || (id >= Constants.t_and && id <= Constants.t_while)) {
+        if (id >= Constants.t_and && id <= Constants.t_while) {
             return "palavra reservada";
         }
         return switch (id) {

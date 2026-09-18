@@ -1,0 +1,71 @@
+#Options
+GenerateScanner = true
+GenerateParser = false
+Language = Java
+ScannerName = Lexico
+ScannerCaseSensitive = true
+ScannerTable = Compact
+Input = Stream
+#RegularDefinitions
+//def regulares auxiliares
+
+mai:[A-Z]
+min:[a-z]
+letra:[a-zA-Z]
+dig:[0-9]
+digLetra:[0-9]|[a-zA-Z]
+
+bloco:#[^#]*#
+
+#Tokens
+//palavras reservadas
+
+palavraReservada:! {min}({mai}?{min})*
+idInt:! i_{letra}{digLetra}*
+idFloat:! f_{letra}{digLetra}*
+idString:! s_{letra} {digLetra}*
+idBool:! b_{letra}{digLetra}*
+
+constInt:! {dig}+
+constFloat:! {dig}+","{dig}+
+constString:! \"[^\n\""\"]*\"
+
+//reconhecer ignorar e formatar
+:!{bloco}
+:[\n\s\t] 
+
+//palavras reservadas
+and = palavraReservada : "and"
+false = palavraReservada : "false"
+if = palavraReservada : "if"
+in = palavraReservada : "in"
+isFalseDo = palavraReservada : "isFalseDo"
+isTrueDo = palavraReservada : "isTrueDo"
+module = palavraReservada : "module"
+not = palavraReservada : "not"
+or = palavraReservada : "or"
+out = palavraReservada : "out"
+true = palavraReservada : "true"
+while = palavraReservada : "while"
+
+//simbolos especiais
+","
+":"
+";" 
+"[" 
+"]" 
+"(" 
+")" 
+"{" 
+"}" 
+"+" 
+"-" 
+"*" 
+"/" 
+"<-" 
+"=" 
+"<>" 
+"<" 
+">"
+
+
