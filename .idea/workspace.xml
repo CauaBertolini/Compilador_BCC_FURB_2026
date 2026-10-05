@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b031e09-08ee-4c89-b8c4-30e14fb7b8d9" name="Changes" comment="" />
+    <list default="true" id="2b031e09-08ee-4c89-b8c4-30e14fb7b8d9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/GALS/Lexico.gals" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/controller/CompilerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/controller/CompilerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/ScannerConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/ScannerConstants.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,9 +19,83 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;cafcaesar&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/CauaBertolini/Compilador_BCC_FURB_2026.git&quot;,
+    &quot;accountId&quot;: &quot;8b8d0ac4-cee7-4615-956a-95f26b68a14a&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/controller/CompilerController.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.000067722746098" />
+      <entry key="MS500" value="1.1466043686539849" />
+      <entry key="S2" value="1.6187806552192754" />
+      <entry key="S5" value="1.8253054085126572" />
+      <entry key="S10" value="1.908463212525778" />
+      <entry key="S30" value="1.9685062965287776" />
+      <entry key="S60" value="1.9841271749772882" />
+      <entry key="M2" value="1.99203184171542" />
+      <entry key="M5" value="1.996805085153645" />
+      <entry key="M10" value="1.9984012645993818" />
+      <entry key="M15" value="1.9989338922026203" />
+      <entry key="M30" value="1.9994668039522976" />
+      <entry key="H1" value="1.9997333664294183" />
+      <entry key="H2" value="1.9998666743268416" />
+      <entry key="H4" value="1.9999333349413058" />
+      <entry key="D1" value="1.9999888888482447" />
+      <entry key="W1" value="1.9999984126850476" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.752623471207057" />
+      <entry key="MS500" value="0.9843568073107819" />
+      <entry key="S2" value="1.432009807437953" />
+      <entry key="S5" value="1.7184017719629279" />
+      <entry key="S10" value="1.8480848398747067" />
+      <entry key="S30" value="1.9466640264614095" />
+      <entry key="S60" value="1.9729795313592804" />
+      <entry key="M2" value="1.9864004561446975" />
+      <entry key="M5" value="1.9945385941194507" />
+      <entry key="M10" value="1.9972656860879663" />
+      <entry key="M15" value="1.9981763206609917" />
+      <entry key="M30" value="1.9990877583915303" />
+      <entry key="H1" value="1.999543778665972" />
+      <entry key="H2" value="1.9997718641949043" />
+      <entry key="H4" value="1.9998859258122272" />
+      <entry key="D1" value="1.9999809867623637" />
+      <entry key="W1" value="1.999997283801814" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="3IKkyVamQj5z2PyiNoQca8Tv4Cm" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -23,18 +106,23 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/cauab/Documents/GitHub/Compilador_BCC_FURB_2026"
+    "kronk.content.tree.expanded.paths": "",
+    "last_opened_file_path": "C:/Users/cauab/Documents/GitHub/Compilador_BCC_FURB_2026",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "to.speed.mode.migration.done": "true"
   }
 }]]></component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.28539.33" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="2b031e09-08ee-4c89-b8c4-30e14fb7b8d9" name="Changes" comment="" />
@@ -44,5 +132,8 @@
       <updated>1787520901143</updated>
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

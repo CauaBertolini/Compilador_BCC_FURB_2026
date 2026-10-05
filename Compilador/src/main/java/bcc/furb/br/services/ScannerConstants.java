@@ -1275,7 +1275,7 @@ public interface ScannerConstants {
     int[] SPECIAL_CASES_INDEXES = { 0, 0, 0, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
             12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12 };
 
-    String[] SPECIAL_CASES_KEYS = { "and", "false", "if", "in", "isfalsedo", "istruedo", "module", "not", "or", "out",
+    String[] SPECIAL_CASES_KEYS = { "and", "false", "if", "in", "isFalseDo", "isTrueDo", "module", "not", "or", "out",
             "true", "while" };
 
     int[] SPECIAL_CASES_VALUES = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 };

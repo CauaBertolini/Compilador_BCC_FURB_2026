@@ -16,8 +16,8 @@ public interface Constants extends ScannerConstants
     int t_false = 11;
     int t_if = 12;
     int t_in = 13;
-    int t_isfalsedo = 14;
-    int t_istruedo = 15;
+    int t_isFalseDo = 14;
+    int t_isTrueDo = 15;
     int t_module = 16;
     int t_not = 17;
     int t_or = 18;
