@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b031e09-08ee-4c89-b8c4-30e14fb7b8d9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/GALS/Lexico.gals" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/controller/CompilerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/controller/CompilerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/ScannerConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/ScannerConstants.java" afterDir="false" />
-    </list>
+    <list default="true" id="2b031e09-08ee-4c89-b8c4-30e14fb7b8d9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,11 +103,11 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Compilador__Léxico__Sintático",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "kronk.content.tree.expanded.paths": "",
-    "last_opened_file_path": "C:/Users/cauab/Documents/GitHub/Compilador_BCC_FURB_2026",
+    "last_opened_file_path": "/home/unkown_caesar/Downloads",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -121,8 +115,21 @@
     "nodejs_package_manager_path": "npm",
     "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
     "to.speed.mode.migration.done": "true"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT"
+    ]
   }
 }]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10968.63" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10968.63" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="2b031e09-08ee-4c89-b8c4-30e14fb7b8d9" name="Changes" comment="" />
