@@ -125,7 +125,7 @@ public class CompilerController {
             String msg = e.getMessage();
             String textoErro;
             int linha = calcularLinha(input, e.getPosition());
-            Token encontrado = buscarToken(input, e.getPosition());
+            String encontrado = getLexemaEncontrado(buscarToken(input, e.getPosition()));
 
             textoErro = ("linha " + linha + ": encontrado " + encontrado + " esperado " + e.getMessage());
             
@@ -146,23 +146,28 @@ public class CompilerController {
     }
 
     // O Sintatico gerado não expõe o token atual (e não pode ser alterado), então
-    // relê a entrada até o token que começa na posição do erro. null = fim de arquivo ($)
+    // reposiciona o léxico na posição do erro e lê esse token. null = fim de arquivo ($)
     private Token buscarToken(String input, int posicao) {
-
         Lexico lexico = new Lexico();
         lexico.setInput(new StringReader(input));
-
+        lexico.setPosition(posicao);
         try {
-            Token t;
-            while ((t = lexico.nextToken()) != null && t.getPosition() <= posicao) {
-                if (t.getPosition() == posicao) {
-                    return t;
-                }
-            }
+            return lexico.nextToken();
         } catch (LexicalError e) {
-            // não ocorre antes da posição do erro: o parser já leu esses tokens sem erro léxico
+            // não ocorre: o parser já leu esse token sem erro léxico
+            return null;
         }
-        return null;
+    }
+
+    // conforme o enunciado: $ vira EOF, constante string vira constante_string, demais mostram o lexema
+    private String getLexemaEncontrado(Token token) {
+        if (token == null) {
+            return "EOF";
+        }
+        if (token.getId() == Constants.t_constString) {
+            return "constante_string";
+        }
+        return token.getLexeme();
     }
 
     private int calcularLinha(String input, int posicao) {
