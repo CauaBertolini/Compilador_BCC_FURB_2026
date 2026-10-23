@@ -17,7 +17,6 @@ public class CompilerFrame extends JFrame {
     public CompilerFrame() {
         super("Compilador - BCC FURB");
 
-
         setSize(1500, 800);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,21 +24,51 @@ public class CompilerFrame extends JFrame {
 
         setLayout(new BorderLayout());
 
-
         editorTextArea = new JTextArea();
         messageTextArea = new JTextArea();
-
 
         Font codeFont = new Font("Consolas", Font.PLAIN, 14);
         editorTextArea.setFont(codeFont);
         messageTextArea.setFont(codeFont);
 
-
         editorTextArea.setMargin(new Insets(5, 5, 5, 5));
         editorTextArea.setLineWrap(false);
 
+        // Barra de numeração de linhas fixa à esquerda (não rola horizontalmente)
+        JTextArea lineNumbersTextArea = new JTextArea(" 1 ");
+        lineNumbersTextArea.setFont(codeFont);
+        lineNumbersTextArea.setEditable(false);
+        lineNumbersTextArea.setFocusable(false);
+        lineNumbersTextArea.setBackground(new Color(238, 238, 238));
+        lineNumbersTextArea.setForeground(new Color(128, 128, 128));
+        lineNumbersTextArea.setMargin(new Insets(5, 5, 5, 5));
+        lineNumbersTextArea.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.LIGHT_GRAY));
 
-        editorTextArea.setBorder(new NumberedBorder());
+        Runnable updateLines = () -> {
+            int lineCount = Math.max(1, editorTextArea.getLineCount());
+            StringBuilder sb = new StringBuilder();
+            for (int i = 1; i <= lineCount; i++) {
+                sb.append(i == 1 ? " " : "\n ").append(i).append(" ");
+            }
+            lineNumbersTextArea.setText(sb.toString());
+        };
+
+        editorTextArea.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                updateLines.run();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                updateLines.run();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                updateLines.run();
+            }
+        });
 
         messageTextArea.setEditable(false);
         messageTextArea.setMargin(new Insets(5, 5, 5, 5));
@@ -47,18 +76,20 @@ public class CompilerFrame extends JFrame {
         JScrollPane editorScrollPane = new JScrollPane(editorTextArea);
         editorScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         editorScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-
+        editorScrollPane.setRowHeaderView(lineNumbersTextArea);
+        editorScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        editorScrollPane.getHorizontalScrollBar().setUnitIncrement(16);
 
         JScrollPane messageScrollPane = new JScrollPane(messageTextArea);
         messageScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         messageScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-
+        messageScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        messageScrollPane.getHorizontalScrollBar().setUnitIncrement(16);
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, editorScrollPane, messageScrollPane);
         splitPane.setDividerLocation(450);
         splitPane.setContinuousLayout(true);
         add(splitPane, BorderLayout.CENTER);
-
 
         Action newAction = new AbstractAction("novo [ctrl-n]") {
             @Override
@@ -134,7 +165,6 @@ public class CompilerFrame extends JFrame {
         };
         teamAction.putValue(Action.SMALL_ICON, carregarIcone("/icons/equipe.png"));
 
-
         registerKeyboardShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK), "newAction",
                 newAction);
         registerKeyboardShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK), "openAction",
@@ -149,7 +179,6 @@ public class CompilerFrame extends JFrame {
                 cutAction);
         registerKeyboardShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "compileAction", compileAction);
         registerKeyboardShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0), "teamAction", teamAction);
-
 
         JPanel toolbarPanel = new JPanel();
         toolbarPanel.setLayout(new BoxLayout(toolbarPanel, BoxLayout.Y_AXIS));
@@ -185,7 +214,6 @@ public class CompilerFrame extends JFrame {
         toolbarPanel.add(Box.createVerticalGlue());
         add(toolbarPanel, BorderLayout.WEST);
 
-
         JPanel statusBarPanel = new JPanel(new BorderLayout());
         statusBarPanel.setPreferredSize(new Dimension(1500, 25));
         statusBarPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
@@ -201,8 +229,6 @@ public class CompilerFrame extends JFrame {
         root.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyStroke, actionName);
         root.getActionMap().put(actionName, action);
     }
-
-
 
     public void setController(CompilerController controller) {
         this.controller = controller;

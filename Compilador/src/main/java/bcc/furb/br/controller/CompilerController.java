@@ -1,8 +1,17 @@
 package bcc.furb.br.controller;
 
-import bcc.furb.br.services.*;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import bcc.furb.br.services.gals.Constants;
+import bcc.furb.br.services.gals.LexicalError;
+import bcc.furb.br.services.gals.Lexico;
+import bcc.furb.br.services.gals.SemanticError;
+import bcc.furb.br.services.gals.Semantico;
+import bcc.furb.br.services.gals.Sintatico;
+import bcc.furb.br.services.gals.SyntaticError;
+import bcc.furb.br.services.gals.Token;
 import bcc.furb.br.view.CompilerFrame;
 import java.io.File;
 import java.io.IOException;
@@ -88,73 +97,49 @@ public class CompilerController {
     public void handleCompile() {
         String input = view.getEditorText();
         Lexico lexico = new Lexico();
-        getTokens(input, lexico);
-    }
+        Sintatico sintatico = new Sintatico();
+        Semantico semantico = new Semantico();
 
-    public void handleTeam() {
-        writeInConsole(
-                "Equipe de desenvolvimento:\n- Cauã Bertolini\n- Cesar Augusto Floriani\n- Eduarda Mazureck");
-    }
-
-    public void getTokens(String input, Lexico lexico) {
-        lexico.setInput(input);
-
-        List<Token> tokens = new ArrayList<>();
+        lexico.setInput(new StringReader(input));
 
         try {
-            Token t = null;
-            while ((t = lexico.nextToken()) != null) {
-                if (t.getId() == Constants.t_palavraReservada) {
-                    throw new LexicalError("palavra reservada inválida", t.getPosition());
-                }
-                tokens.add(t);
-            }
-
+            sintatico.parse(lexico, semantico);
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(String.format("%-15s %-40s %s\n", "linha", "classe", "lexema"));
-            for (Token token : tokens) {
-                int linha = calcularLinha(input, token.getPosition());
-                String classe = getNomeClasse(token.getId());
-                stringBuilder.append(String.format("%-15d %-40s %s\n", linha, classe, token.getLexeme()));
-            }
             stringBuilder.append("\nprograma compilado com sucesso");
-            writeInConsole(stringBuilder.toString());
+            writeInConsole(stringBuilder.toString()); // tradução dirigida pela sintaxe
+            // mensagem: programa compilado com sucesso - na área reservada para mensagens
 
         } catch (LexicalError e) {
-            int linhaErro = calcularLinha(input, e.getPosition());
+            // tratar erros léxicos: apresentar linha onde o erro foi detectado e mensagem
+            // "erro léxico"
             String msg = e.getMessage();
             String textoErro;
+            int linha = calcularLinha(input, e.getPosition());
 
-            if ("símbolo inválido".equals(msg)) {
-                String simbolo = extrairSimbolo(input, e.getPosition());
-                textoErro = "linha " + linhaErro + ": " + simbolo + " " + msg;
-            } else if ("palavra reservada inválida".equals(msg)) {
-                String palavra = extrairPalavra(input, e.getPosition());
-                textoErro = "linha " + linhaErro + ": " + palavra + " " + msg;
-            } else {
-                textoErro = "linha " + linhaErro + ": " + msg;
-            }
+            textoErro = "linha " + linha + ": " + e.getMessage();
 
             writeInConsole(textoErro);
-        }
-    }
+        } catch (SyntaticError e) {
 
-    private String extrairSimbolo(String texto, int posicao) {
-        if (posicao >= 0 && posicao < texto.length()) {
-            return String.valueOf(texto.charAt(posicao));
-        }
-        return "";
-    }
+            String msg = e.getMessage();
+            String textoErro;
+            int linha = calcularLinha(input, e.getPosition());
 
-    private String extrairPalavra(String texto, int posicao) {
-        if (posicao < 0 || posicao >= texto.length()) {
-            return "";
+            textoErro = ("linha " + linha + ": encontrado" + e.getClass() + " esperado " + e.getMessage());
+            writeInConsole(textoErro);
+            // SERÁ EXPLICADO NA AULA DE 08/10
+
+            // e.getMessage() - são os símbolos esperados
+            // e.getMessage() - retorna a mensagem de erro de PARSER_ERROR
+            // (ver ParserConstants.java)
+            // necessário adaptar conforme o enunciado da parte 3
+
+            // e.getPosition() - retorna a posição inicial do erro
+            // necessário adaptar para mostrar a linha
+
+            // necessário mostrar também o símbolo encontrado
+        } catch (SemanticError e) {
         }
-        int fim = posicao;
-        while (fim < texto.length() && (Character.isLetterOrDigit(texto.charAt(fim)) || texto.charAt(fim) == '_')) {
-            fim++;
-        }
-        return texto.substring(posicao, fim);
     }
 
     private int calcularLinha(String texto, int posicao) {
@@ -165,6 +150,11 @@ public class CompilerController {
             }
         }
         return linha;
+    }
+
+    public void handleTeam() {
+        writeInConsole(
+                "Equipe de desenvolvimento:\n- Cauã Bertolini\n- Cesar Augusto Floriani\n- Eduarda Mazureck");
     }
 
     private String getNomeClasse(int id) {
