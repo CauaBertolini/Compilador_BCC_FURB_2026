@@ -119,13 +119,16 @@ public class CompilerController {
             textoErro = "linha " + linha + ": " + e.getMessage();
 
             writeInConsole(textoErro);
+
         } catch (SyntaticError e) {
 
             String msg = e.getMessage();
             String textoErro;
             int linha = calcularLinha(input, e.getPosition());
+            Token encontrado = buscarToken(input, e.getPosition());
 
             textoErro = ("linha " + linha + ": encontrado" + e.getClass() + " esperado " + e.getMessage());
+            
             writeInConsole(textoErro);
             // SERÁ EXPLICADO NA AULA DE 08/10
 
@@ -142,10 +145,30 @@ public class CompilerController {
         }
     }
 
-    private int calcularLinha(String texto, int posicao) {
+    // O Sintatico gerado não expõe o token atual (e não pode ser alterado), então
+    // relê a entrada até o token que começa na posição do erro. null = fim de arquivo ($)
+    private Token buscarToken(String input, int posicao) {
+
+        Lexico lexico = new Lexico();
+        lexico.setInput(new StringReader(input));
+
+        try {
+            Token t;
+            while ((t = lexico.nextToken()) != null && t.getPosition() <= posicao) {
+                if (t.getPosition() == posicao) {
+                    return t;
+                }
+            }
+        } catch (LexicalError e) {
+            // não ocorre antes da posição do erro: o parser já leu esses tokens sem erro léxico
+        }
+        return null;
+    }
+
+    private int calcularLinha(String input, int posicao) {
         int linha = 1;
-        for (int i = 0; i < posicao && i < texto.length(); i++) {
-            if (texto.charAt(i) == '\n') {
+        for (int i = 0; i < posicao && i < input.length(); i++) {
+            if (input.charAt(i) == '\n') {
                 linha++;
             }
         }
@@ -155,24 +178,6 @@ public class CompilerController {
     public void handleTeam() {
         writeInConsole(
                 "Equipe de desenvolvimento:\n- Cauã Bertolini\n- Cesar Augusto Floriani\n- Eduarda Mazureck");
-    }
-
-    private String getNomeClasse(int id) {
-        if (id >= Constants.t_and && id <= Constants.t_while) {
-            return "palavra reservada";
-        }
-        return switch (id) {
-            case Constants.t_idInt, Constants.t_idFloat, Constants.t_idString, Constants.t_idBool -> "identificador";
-            case Constants.t_constInt -> "constante_int";
-            case Constants.t_constFloat -> "constante_float";
-            case Constants.t_constString -> "constante_string";
-            default -> {
-                if (id >= Constants.t_TOKEN_22 && id <= Constants.t_TOKEN_39) {
-                    yield "símbolo especial";
-                }
-                yield "desconhecido";
-            }
-        };
     }
 
     private void writeInConsole(String mensagem) {
