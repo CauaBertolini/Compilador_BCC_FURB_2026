@@ -127,7 +127,7 @@ public class CompilerController {
             int linha = calcularLinha(input, e.getPosition());
             Token encontrado = buscarToken(input, e.getPosition());
 
-            textoErro = ("linha " + linha + ": encontrado" + e.getClass() + " esperado " + e.getMessage());
+            textoErro = ("linha " + linha + ": encontrado " + encontrado + " esperado " + e.getMessage());
             
             writeInConsole(textoErro);
             // SERÁ EXPLICADO NA AULA DE 08/10
