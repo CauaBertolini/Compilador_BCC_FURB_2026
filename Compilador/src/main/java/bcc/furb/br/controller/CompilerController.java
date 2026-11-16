@@ -4,6 +4,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import bcc.furb.br.services.LexicoValidado;
 import bcc.furb.br.services.gals.Constants;
 import bcc.furb.br.services.gals.LexicalError;
 import bcc.furb.br.services.gals.Lexico;
@@ -96,7 +97,7 @@ public class CompilerController {
 
     public void handleCompile() {
         String input = view.getEditorText();
-        Lexico lexico = new Lexico();
+        Lexico lexico = new LexicoValidado();
         Sintatico sintatico = new Sintatico();
         Semantico semantico = new Semantico();
 
