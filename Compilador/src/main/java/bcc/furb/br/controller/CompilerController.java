@@ -105,7 +105,7 @@ public class CompilerController {
         try {
             sintatico.parse(lexico, semantico);
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("\nprograma compilado com sucesso");
+            stringBuilder.append("programa compilado com sucesso");
             writeInConsole(stringBuilder.toString()); // tradução dirigida pela sintaxe
             // mensagem: programa compilado com sucesso - na área reservada para mensagens
 

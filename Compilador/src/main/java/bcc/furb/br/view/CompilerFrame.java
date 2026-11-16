@@ -71,20 +71,36 @@ public class CompilerFrame extends JFrame {
         });
 
         messageTextArea.setEditable(false);
+        messageTextArea.setLineWrap(false);
         messageTextArea.setMargin(new Insets(5, 5, 5, 5));
 
         JScrollPane editorScrollPane = new JScrollPane(editorTextArea);
         editorScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         editorScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         editorScrollPane.setRowHeaderView(lineNumbersTextArea);
-        editorScrollPane.getVerticalScrollBar().setUnitIncrement(16);
-        editorScrollPane.getHorizontalScrollBar().setUnitIncrement(16);
+        
+        // Repassa eventos da rodinha do mouse da barra de numeração para a rolagem do editor
+        lineNumbersTextArea.addMouseWheelListener(e -> {
+            editorScrollPane.dispatchEvent(SwingUtilities.convertMouseEvent(lineNumbersTextArea, e, editorScrollPane));
+        });
+
+        int scrollSpeed = 24;
+        editorScrollPane.getVerticalScrollBar().setUnitIncrement(scrollSpeed);
+        editorScrollPane.getHorizontalScrollBar().setUnitIncrement(scrollSpeed);
+        editorScrollPane.getVerticalScrollBar().setUI(new javax.swing.plaf.metal.MetalScrollBarUI());
+        editorScrollPane.getHorizontalScrollBar().setUI(new javax.swing.plaf.metal.MetalScrollBarUI());
 
         JScrollPane messageScrollPane = new JScrollPane(messageTextArea);
         messageScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         messageScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        messageScrollPane.getVerticalScrollBar().setUnitIncrement(16);
-        messageScrollPane.getHorizontalScrollBar().setUnitIncrement(16);
+        messageScrollPane.getVerticalScrollBar().setUnitIncrement(scrollSpeed);
+        messageScrollPane.getHorizontalScrollBar().setUnitIncrement(scrollSpeed);
+        messageScrollPane.getVerticalScrollBar().setUI(new javax.swing.plaf.metal.MetalScrollBarUI());
+        messageScrollPane.getHorizontalScrollBar().setUI(new javax.swing.plaf.metal.MetalScrollBarUI());
+
+        // Evita que o divisor do split colapse ou esconda as barras de rolagem
+        editorScrollPane.setMinimumSize(new Dimension(100, 100));
+        messageScrollPane.setMinimumSize(new Dimension(100, 60));
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, editorScrollPane, messageScrollPane);
         splitPane.setDividerLocation(450);

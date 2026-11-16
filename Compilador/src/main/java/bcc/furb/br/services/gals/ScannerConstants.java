@@ -1313,16 +1313,16 @@ public interface ScannerConstants {
                         "", // 25
                         "", // 26
                         "", // 27
-                        "Erro léxico", // "constante_float inválida", // 28 - número seguido de vírgula sem dígitos
+                        "erro léxico", // "constante_float inválida", // 28 - número seguido de vírgula sem dígitos
                                        // depois
                         "", // 29
                         "", // 30
-                        "Erro léxico", // "palavra reservada inválida", // 31 - sequência de letras não é palavra
+                        "erro léxico", // "palavra reservada inválida", // 31 - sequência de letras não é palavra
                                        // reservada válida
-                        "Erro léxico", // "identificador inválido", // 32 - idBool malformado
-                        "Erro léxico", // "identificador inválido", // 33 - idFloat malformado
-                        "Erro léxico", // "identificador inválido", // 34 - idInt malformado
-                        "Erro léxico", // "identificador inválido", // 35 - idString malformado
+                        "erro léxico", // "identificador inválido", // 32 - idBool malformado
+                        "erro léxico", // "identificador inválido", // 33 - idFloat malformado
+                        "erro léxico", // "identificador inválido", // 34 - idInt malformado
+                        "erro léxico", // "identificador inválido", // 35 - idString malformado
                         "", // 36
                         "", // 37
                         "", // 38

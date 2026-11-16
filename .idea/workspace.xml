@@ -5,20 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b031e09-08ee-4c89-b8c4-30e14fb7b8d9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/controller/CompilerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/controller/CompilerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/lexico/AnalysisError.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/lexico/Constants.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/lexico/LexicalError.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/lexico/Lexico.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/lexico/ScannerConstants.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/lexico/SemanticError.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/lexico/SyntaticError.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/lexico/Token.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/ScannerConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/ScannerConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/view/CompilerFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/view/CompilerFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +27,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/CauaBertolini/Compilador_BCC_FURB_2026.git&quot;,
-    &quot;accountId&quot;: &quot;8b8d0ac4-cee7-4615-956a-95f26b68a14a&quot;
+    &quot;accountId&quot;: &quot;711b01f3-98dc-4622-a7ea-cc682a215a60&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -133,7 +122,7 @@
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "kronk.content.tree.expanded.paths": "",
-    "last_opened_file_path": "/home/unkown_caesar/Documents/GitHub/Compilador_BCC_FURB_2026/Compilador",
+    "last_opened_file_path": "/home/unkown_caesar/Documents/Python_study",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -152,8 +141,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10968.63" />
-        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10968.63" />
+        <option value="bundled-jdk-30f59d01ecdd-2df11533d9fe-intellij.indexing.shared.core-IU-262.11879.100" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.11879.100" />
       </set>
     </attachedChunks>
   </component>
