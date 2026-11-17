@@ -1,6 +1,5 @@
 package bcc.furb.br.controller;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,7 @@ import bcc.furb.br.services.gals.Constants;
 import bcc.furb.br.services.gals.LexicalError;
 import bcc.furb.br.services.gals.Lexico;
 import bcc.furb.br.services.gals.SemanticError;
-import bcc.furb.br.services.gals.Semantico;
+import bcc.furb.br.services.Semantico;
 import bcc.furb.br.services.gals.Sintatico;
 import bcc.furb.br.services.gals.SyntaticError;
 import bcc.furb.br.services.gals.Token;
@@ -101,7 +100,7 @@ public class CompilerController {
         Sintatico sintatico = new Sintatico();
         Semantico semantico = new Semantico();
 
-        lexico.setInput(new StringReader(input));
+        lexico.setInput(input);
 
         try {
             sintatico.parse(lexico, semantico);
@@ -117,7 +116,7 @@ public class CompilerController {
             String textoErro;
             int linha = calcularLinha(input, e.getPosition());
 
-            textoErro = "linha " + linha + ": " + e.getMessage();
+            textoErro = "linha " + linha + ": erro léxico";
 
             writeInConsole(textoErro);
 
@@ -128,7 +127,7 @@ public class CompilerController {
             int linha = calcularLinha(input, e.getPosition());
             String encontrado = getLexemaEncontrado(buscarToken(input, e.getPosition()));
 
-            textoErro = ("linha " + linha + ": encontrado " + encontrado + " esperado " + e.getMessage());
+            textoErro = ("linha " + linha + ": encontrado " + encontrado + ", erro sintático");
             
             writeInConsole(textoErro);
             // SERÁ EXPLICADO NA AULA DE 08/10
@@ -143,6 +142,8 @@ public class CompilerController {
 
             // necessário mostrar também o símbolo encontrado
         } catch (SemanticError e) {
+            int linha = calcularLinha(input, e.getPosition());
+            writeInConsole("linha " + linha + ": " + e.getMessage());
         }
     }
 
@@ -150,7 +151,7 @@ public class CompilerController {
     // reposiciona o léxico na posição do erro e lê esse token. null = fim de arquivo ($)
     private Token buscarToken(String input, int posicao) {
         Lexico lexico = new Lexico();
-        lexico.setInput(new StringReader(input));
+        lexico.setInput(input);
         lexico.setPosition(posicao);
         try {
             return lexico.nextToken();
