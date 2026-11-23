@@ -104,7 +104,7 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
 
    private void acao104(){}
 
-   private void acao105(){}
+   private void acao105(Token token){}
 
    private void acao106(){}
 
@@ -121,7 +121,7 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
       codigoObjeto.append("call void [mscorlib]System.Console::Write(" + tipo + ")\n");
     }
 
-   private void acao110(){}
+   private void acao110(Token token){}
 
    private void acao111(){}
 
@@ -129,7 +129,7 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
 
    private void acao113(){}
 
-   private void acao114(){}
+   private void acao114(Token token){}
 
    private void acao115(){}
 
@@ -169,7 +169,32 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
    }
 
 
-   private void acao122(){}
+   // #122: os dois operandos já estão na pilha da IL; gera a comparação
+   // guardada pela #121. O resultado é sempre bool (TABELA DE TIPOS).
+   private void acao122(){
+      String tipo2 = pilhaTipos.pop();   // operando da direita
+      String tipo1 = pilhaTipos.pop();   // operando da esquerda
+      pilhaTipos.push("bool");
+
+      // ceq em string compara referências; String::Compare devolve <0, 0 ou >0,
+      // que é então comparado com 0 usando o mesmo operador relacional
+      if ("string".equals(tipo1) && "string".equals(tipo2)) {
+         codigoObjeto.append("call int32 [mscorlib]System.String::Compare(string, string)\n");
+         codigoObjeto.append("ldc.i4.0\n");
+      }
+
+      switch (operadorRelacional) {
+         case "="  -> codigoObjeto.append("ceq\n");
+         case ">"  -> codigoObjeto.append("cgt\n");
+         case "<"  -> codigoObjeto.append("clt\n");
+         case "<>" -> {
+            // IL não tem "diferente": compara igualdade e inverte o resultado
+            codigoObjeto.append("ceq\n");
+            codigoObjeto.append("ldc.i4.0\n");
+            codigoObjeto.append("ceq\n");
+         }
+      }
+   }
 
    private void acao123() {
       String tipo1 = pilhaTipos.pop();
@@ -212,7 +237,7 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
    }
 
 
-   private void acao127(){}
+   private void acao127(Token token){}
 
    private void acao128(Token token) {
      pilhaTipos.push("int64");
