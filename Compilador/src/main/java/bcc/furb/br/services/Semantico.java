@@ -28,6 +28,40 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
       return "bool";
    }
 
+   private Stack<String> pilhaVetores = new Stack<>();
+
+   private String novoRotulo() {
+      return "L" + (++contadorRotulos);
+   }
+
+   private String getTipoCLR(String tipo) {
+      return switch (tipo) {
+         case "int64"   -> "Int64";
+         case "float64" -> "Double";
+         case "string"  -> "String";
+         default        -> "Boolean";
+      };
+   }
+
+   private String getLdelem(String tipo) {
+      return switch (tipo) {
+         case "int64"   -> "ldelem.i8";
+         case "float64" -> "ldelem.r8";
+         case "string"  -> "ldelem.ref";
+         default        -> "ldelem.i1";
+      };
+   }
+
+   private String getStelem(String tipo) {
+      return switch (tipo) {
+         case "int64"   -> "stelem.i8";
+         case "float64" -> "stelem.r8";
+         case "string"  -> "stelem.ref";
+         default        -> "stelem.i1";
+      };
+   }
+
+
    public void executeAction(int action, Token token) throws SemanticError {
       System.out.println("Acao #"+action+", Token: "+token);
 
@@ -102,15 +136,55 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
       identificador = token.getLexeme();
    }
 
-   private void acao104(){}
+   private void acao104(){
+      tabelaSimbolos.put(identificador, 0);
+      String tipo = getTipo(identificador);
+      codigoObjeto.append(".locals (" + tipo + " " + identificador + ") \n");
+   }
 
-   private void acao105(Token token){}
+   private void acao105(Token token){
+      int tamanho = Integer.parseInt(token.getLexeme());
+      tabelaSimbolos.put(identificador, tamanho);
+      String tipo = getTipo(identificador);
 
-   private void acao106(){}
+      codigoObjeto.append(".locals (" + tipo + "[] " + identificador + ") \n");
+      codigoObjeto.append("ldc.i4 " + tamanho + "\n");
+      codigoObjeto.append("newarr [mscorlib]System." + getTipoCLR(tipo) + "\n");
+      codigoObjeto.append("stloc" + identificador + "\n");
 
-   private void acao107(){}
 
-   private void acao108(){}
+   }
+
+   private void acao106(){
+      String tipo = pilhaTipos.pop();
+      if ("int64".equals((tipo))) {
+         codigoObjeto.append("conv.i8\n");
+      }
+   }
+
+   private void acao107(){
+      codigoObjeto.append("ldloc " + identificador + "\n");
+   }
+
+   private void acao108(){
+      String tipo = getTipo(identificador);
+      codigoObjeto.append("call string [mscorlib]SYstem.Int64::Parse(string)\n");
+
+      if ("int64".equals(tipo)) {
+         codigoObjeto.append("call int64 [mscorlib]SYstem.Int64::Parse(string)\n");
+      } else if("float64".equals(tipo)) {
+         codigoObjeto.append("call float64 [mscorlib]SYstem.Double::Parse(string)\n");
+      } else if ("bool".equals(tipo)) {
+         codigoObjeto.append("call bool [mscorlib]SYstem.Boolean::Parse(string)\n");
+      }
+
+      int tamanho = tabelaSimbolos.getOrDefault(identificador, 0);
+      if (tamanho == 0) {
+         codigoObjeto.append("stloc " + identificador + "\n");
+      } else {
+         codigoObjeto.append(getStelem(tipo) + "\n");
+      }
+   }
 
 
    private void acao109() {
@@ -121,17 +195,58 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
       codigoObjeto.append("call void [mscorlib]System.Console::Write(" + tipo + ")\n");
     }
 
-   private void acao110(Token token){}
+   private void acao110(Token token){
+      pilhaTipos.pop();
+      String rotulo = novoRotulo();
+      pilhaRotulos.push(rotulo);
 
-   private void acao111(){}
+      if ("isTrueDo".equals(token.getLexeme())) {
+         codigoObjeto.append("brfalse" + rotulo + "\n");
+      } else {
+         codigoObjeto.append("brtrue" + rotulo + "\n");
+      }
+   }
 
-   private void acao112(){}
+   private void acao111(){
+      String rotulo = pilhaRotulos.pop();
+      codigoObjeto.append(rotulo + ":\n");
+   }
 
-   private void acao113(){}
+   private void acao112(){
+      String rotuloFim = novoRotulo();
+      codigoObjeto.append("br " + rotuloFim + "\n");
 
-   private void acao114(Token token){}
+      String rotuloElse = pilhaRotulos.pop();
+      codigoObjeto.append(rotuloElse + ":\n");
 
-   private void acao115(){}
+      pilhaRotulos.push(rotuloFim);
+   }
+
+   private void acao113(){
+      String rotuloInicio = novoRotulo();
+      pilhaRotulos.push(rotuloInicio);
+      codigoObjeto.append(rotuloInicio + ":\n");
+   }
+
+   private void acao114(Token token){
+      pilhaTipos.pop();
+      String rotuloFim = novoRotulo();
+      pilhaRotulos.push(rotuloFim);
+
+      if ("isTrueDo".equals(token.getLexeme())) {
+         codigoObjeto.append("brfalse" + rotuloFim + "\n");
+      } else {
+         codigoObjeto.append("brtrue" + rotuloFim + "\n");
+      }
+   }
+
+   private void acao115(){
+      String rotuloFim = pilhaRotulos.pop();
+      String rotuloInicio = pilhaRotulos.pop();
+
+      codigoObjeto.append("br" + rotuloInicio + "\n");
+      codigoObjeto.append(rotuloFim + ":\n");
+   }
 
    private void acao116(){
       pilhaTipos.pop();
@@ -237,7 +352,22 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
    }
 
 
-   private void acao127(Token token){}
+   private void acao127(Token token){
+      String id = token.getLexeme();
+      String tipo = getTipo(id);
+      int tamanho = tabelaSimbolos.getOrDefault(id, 0);
+
+      if (tamanho == 0) {
+         pilhaTipos.push(tipo);
+         codigoObjeto.append("ldloc" + id + "\n");
+         if ("int64".equals(tipo)) {
+            codigoObjeto.append("conv.r8\n");
+         }
+      } else {
+         pilhaVetores.push(id);
+         codigoObjeto.append("ldloc" + id + "\n");
+      }
+   }
 
    private void acao128(Token token) {
      pilhaTipos.push("int64");
@@ -249,13 +379,13 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
    private void acao129(Token token) {
       pilhaTipos.push("float64");
       String valor = token.getLexeme().replace(',', '.');
-      codigoObjeto.append("ldc.r8" + valor + "\n");
+      codigoObjeto.append("ldc.r8 " + valor + "\n");
 
    }
 
    private void acao130(Token token){
       pilhaTipos.push("string");
-      codigoObjeto.append("ldstr" + token.getLexeme() + "\n");
+      codigoObjeto.append("ldstr " + token.getLexeme() + "\n");
    }
 
 
@@ -280,9 +410,24 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
       codigoObjeto.append("mul\n");
    }
 
-   private void acao133(){}
+   private void acao133(){
+      pilhaTipos.pop();
+      codigoObjeto.append("conv.i4\n");
 
-   private void acao134(){}
+      String id = pilhaVetores.pop();
+      String tipo = getTipo(id);
+      pilhaTipos.push(tipo);
+      codigoObjeto.append(getLdelem(tipo) + "\n");
+
+      if ("int64".equals(tipo)) {
+         codigoObjeto.append("conv.r8\n");
+      }
+   }
+
+   private void acao134(){
+      pilhaTipos.pop();
+      codigoObjeto.append("conv.i4\n");
+   }
 
 
    public String getCodigoObjeto() {
