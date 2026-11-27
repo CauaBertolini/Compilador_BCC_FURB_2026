@@ -104,11 +104,16 @@ public class CompilerController {
 
         try {
             sintatico.parse(lexico, semantico);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("programa compilado com sucesso");
-            writeInConsole(stringBuilder.toString()); // tradução dirigida pela sintaxe
-            // mensagem: programa compilado com sucesso - na área reservada para mensagens
 
+            if (currentFile != null) {
+                String nomeArquivo = currentFile.getName();
+                int ultimoPonto = nomeArquivo.lastIndexOf(".");
+                String nomeBase = (ultimoPonto > 0) ? nomeArquivo.substring(0, ultimoPonto) : nomeArquivo;
+                File arquivoIL = new File(currentFile.getParentFile(), nomeBase + ".il");
+
+                Files.write(arquivoIL.toPath(), semantico.getCodigoObjeto().getBytes(StandardCharsets.UTF_8));
+            }
+            writeInConsole("programa compilado com sucesso");
         } catch (LexicalError e) {
             // tratar erros léxicos: apresentar linha onde o erro foi detectado e mensagem
             // "erro léxico"
@@ -144,6 +149,8 @@ public class CompilerController {
         } catch (SemanticError e) {
             int linha = calcularLinha(input, e.getPosition());
             writeInConsole("linha " + linha + ": " + e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

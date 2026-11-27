@@ -7,8 +7,18 @@
     <list default="true" id="2b031e09-08ee-4c89-b8c4-30e14fb7b8d9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/controller/CompilerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/controller/CompilerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/Semantico.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/Semantico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/AnalysisError.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/AnalysisError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/LexicalError.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/LexicalError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/ParserConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/ParserConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/ScannerConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/ScannerConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/view/CompilerFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/view/CompilerFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/SemanticError.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/SemanticError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/Semantico.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/Semantico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/Sintatico.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/Sintatico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/SyntaticError.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/SyntaticError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compilador/src/main/java/bcc/furb/br/services/gals/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GALS/Saves/BNF_t04-01.gals" beforeDir="false" afterPath="$PROJECT_DIR$/GALS/Saves/BNF_t04-01.gals" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,61 +45,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.000067722746098" />
-      <entry key="MS500" value="1.1466043686539849" />
-      <entry key="S2" value="1.6187806552192754" />
-      <entry key="S5" value="1.8253054085126572" />
-      <entry key="S10" value="1.908463212525778" />
-      <entry key="S30" value="1.9685062965287776" />
-      <entry key="S60" value="1.9841271749772882" />
-      <entry key="M2" value="1.99203184171542" />
-      <entry key="M5" value="1.996805085153645" />
-      <entry key="M10" value="1.9984012645993818" />
-      <entry key="M15" value="1.9989338922026203" />
-      <entry key="M30" value="1.9994668039522976" />
-      <entry key="H1" value="1.9997333664294183" />
-      <entry key="H2" value="1.9998666743268416" />
-      <entry key="H4" value="1.9999333349413058" />
-      <entry key="D1" value="1.9999888888482447" />
-      <entry key="W1" value="1.9999984126850476" />
-    </decayedCancelled>
-    <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="0.0" />
-      <entry key="S10" value="0.0" />
-      <entry key="S30" value="0.0" />
-      <entry key="S60" value="0.0" />
-      <entry key="M2" value="0.0" />
-      <entry key="M5" value="0.0" />
-      <entry key="M10" value="0.0" />
-      <entry key="M15" value="0.0" />
-      <entry key="M30" value="0.0" />
-      <entry key="H1" value="0.0" />
-      <entry key="H2" value="0.0" />
-      <entry key="H4" value="0.0" />
-      <entry key="D1" value="0.0" />
-      <entry key="W1" value="0.0" />
+      <entry key="S2" value="7.962764880584263E-184" />
+      <entry key="S5" value="5.760040763841613E-74" />
+      <entry key="S10" value="2.4000084924519774E-37" />
+      <entry key="S30" value="6.214472341905493E-13" />
+      <entry key="S60" value="7.88319618486863E-7" />
+      <entry key="M2" value="8.913944381663732E-4" />
+      <entry key="M5" value="0.14219861104730386" />
+      <entry key="M10" value="3.5032681998202824" />
+      <entry key="M15" value="12.766843781631616" />
+      <entry key="M30" value="54.18638142498569" />
+      <entry key="H1" value="123.24622229060293" />
+      <entry key="H2" value="192.88534245583287" />
+      <entry key="H4" value="243.96156892958285" />
+      <entry key="D1" value="298.49929988050366" />
+      <entry key="W1" value="309.1783268932791" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0000000000164857" />
+      <entry key="MS500" value="1.0069730232146326" />
+      <entry key="S2" value="1.2889716766386996" />
+      <entry key="S5" value="1.608614242238065" />
+      <entry key="S10" value="1.7801373226798374" />
+      <entry key="S30" value="1.9205704255005256" />
+      <entry key="S60" value="1.9594636134330763" />
+      <entry key="M2" value="1.979525794956375" />
+      <entry key="M5" value="2.0639542591836846" />
+      <entry key="M10" value="5.062533466646157" />
+      <entry key="M15" value="13.733865203861132" />
+      <entry key="M30" value="49.727949824618236" />
+      <entry key="H1" value="101.08531079625732" />
+      <entry key="H2" value="146.07692242360557" />
+      <entry key="H4" value="176.19088863451572" />
+      <entry key="D1" value="206.3368083217694" />
+      <entry key="W1" value="212.03425302931262" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.752623471207057" />
-      <entry key="MS500" value="0.9843568073107819" />
-      <entry key="S2" value="1.432009807437953" />
-      <entry key="S5" value="1.7184017719629279" />
-      <entry key="S10" value="1.8480848398747067" />
-      <entry key="S30" value="1.9466640264614095" />
-      <entry key="S60" value="1.9729795313592804" />
-      <entry key="M2" value="1.9864004561446975" />
-      <entry key="M5" value="1.9945385941194507" />
-      <entry key="M10" value="1.9972656860879663" />
-      <entry key="M15" value="1.9981763206609917" />
-      <entry key="M30" value="1.9990877583915303" />
-      <entry key="H1" value="1.999543778665972" />
-      <entry key="H2" value="1.9997718641949043" />
-      <entry key="H4" value="1.9998859258122272" />
-      <entry key="D1" value="1.9999809867623637" />
-      <entry key="W1" value="1.999997283801814" />
+      <entry key="MS100" value="0.018453010334836425" />
+      <entry key="MS500" value="0.45044655351420887" />
+      <entry key="S2" value="0.9643259612995922" />
+      <entry key="S5" value="1.385521862357567" />
+      <entry key="S10" value="1.6407638381792389" />
+      <entry key="S30" value="1.8661036883598765" />
+      <entry key="S60" value="1.9310914117015854" />
+      <entry key="M2" value="1.9659342330855902" />
+      <entry key="M5" value="2.1999360296929757" />
+      <entry key="M10" value="8.55589035277" />
+      <entry key="M15" value="26.481171420077775" />
+      <entry key="M30" value="103.8768232757775" />
+      <entry key="H1" value="224.29166762882136" />
+      <entry key="H2" value="338.9325306202843" />
+      <entry key="H4" value="420.1341817347628" />
+      <entry key="D1" value="504.83247766121485" />
+      <entry key="W1" value="521.2120452477776" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -100,49 +110,49 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.Compilador [clean].executor": "Run",
-    "Maven.Compilador [compile].executor": "Run",
-    "Maven.Compilador [deploy].executor": "Run",
-    "Maven.Compilador [install].executor": "Run",
-    "Maven.Compilador [package].executor": "Run",
-    "Maven.Compilador [site].executor": "Run",
-    "Maven.Compilador [test].executor": "Run",
-    "Maven.Compilador [validate].executor": "Run",
-    "Maven.Compilador [verify].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "Compilador__Léxico__Sintático",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "kronk.content.tree.expanded.paths": "",
-    "last_opened_file_path": "/home/unkown_caesar/Documents/Python_study",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.Compilador [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Compilador [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Compilador [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Compilador [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Compilador [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Compilador [site].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Compilador [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Compilador [validate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Compilador [verify].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Compilador__Léxico__Sintático__Semântico&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;kronk.content.tree.expanded.paths&quot;: &quot;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/unkown_caesar/Documents/Python_study&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-2df11533d9fe-intellij.indexing.shared.core-IU-262.11879.100" />
-        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.11879.100" />
+        <option value="bundled-jdk-30f59d01ecdd-ac68fc9d2b05-intellij.indexing.shared.core-IU-263.7307.353" />
+        <option value="bundled-js-predefined-d6986cc7102b-56aff7b04f6f-JavaScript-IU-263.7307.353" />
       </set>
     </attachedChunks>
   </component>

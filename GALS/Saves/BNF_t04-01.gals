@@ -134,13 +134,13 @@ while = palavraReservada : "while"
 <identificador_dec_var_1> ::=  "[" constInt #105 "]" | #104 î;
 
 //<identificador_cmd> ::= <identificador> | <identificador> "[" <expressao> "]";
-<identificador_cmd> ::= <identificador> #103 <identificador_cmd_1> #108;
+<identificador_cmd> ::= <identificador> #103 <identificador_cmd_1>;
 <identificador_cmd_1> ::= #107 "[" <expressao> "]" #134 | î;
 
 
 //<lista_identificador> ::= <identificador_cmd> | <identificador_cmd> <aux_lista_identificador>;
-<lista_identificador> ::= <identificador_cmd> <aux_lista_identificador>;
-<aux_lista_identificador> ::= "," <identificador_cmd> <aux_lista_identificador> | î;
+<lista_identificador> ::= <identificador_cmd> #108 <aux_lista_identificador>;
+<aux_lista_identificador> ::= "," <identificador_cmd> #108 <aux_lista_identificador> | î;
 
 
 <dec_var> ::= <lista_var>;
@@ -156,7 +156,7 @@ while = palavraReservada : "while"
 
 <cmd> ::= <cmd_atribuicao> | <cmd_entrada> | <cmd_saida> | <cmd_selecao> | <cmd_repeticao>;
 
-<cmd_atribuicao> ::= <identificador_cmd> #103 "<-" <expressao> #106;
+<cmd_atribuicao> ::= <identificador_cmd>  "<-" <expressao> #106;
 
 <cmd_entrada> ::= in "(" <lista_identificador> ")";
 

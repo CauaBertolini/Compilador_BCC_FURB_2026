@@ -3,9 +3,8 @@ package bcc.furb.br.services;
 import bcc.furb.br.services.gals.SemanticError;
 import bcc.furb.br.services.gals.Token;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
+
 
 // O Sintatico gerado pelo GALS espera um bcc.furb.br.services.gals.Semantico;
 // esta classe estende o stub gerado e implementa as ações semânticas.
@@ -19,7 +18,8 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
    private String operadorRelacional = "";
    private Stack<String> pilhaRotulos = new Stack<>();
    private int contadorRotulos = 0;
-   private Map<String, Integer> tabelaSimbolos = new HashMap<>();
+   private Map<String, Integer> tabelaSimbolos = new LinkedHashMap<>();
+   private Set<String> variaveisUsadas = new HashSet<>();
 
    private String getTipo(String id) {
       if (id.startsWith("i_")) return "int64";
@@ -65,20 +65,9 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
    public void executeAction(int action, Token token) throws SemanticError {
       System.out.println("Acao #"+action+", Token: "+token);
 
-      /*
-      1 : 129; 130; 116; 117; 119; 121; 122;
-
-      2: 103; 104; 106; 108; 127
-
-      3: 110; 111; 112; 113; 114; 115
-
-      4: 105; 107; 134; 106 (ajusatar); 108 (ajustar); 127 (ajustar); 133
-
-
-       */
       switch (action) {
          case 101: acao101(); break;
-         case 102: acao102(); break;
+         case 102: acao102(token); break;
          case 103: acao103(token); break;
          case 104: acao104(); break;
          case 105: acao105(token); break;
@@ -126,7 +115,12 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
       codigoObjeto.append(".entrypoint\n");
 }
 
-   private void acao102() {
+   private void acao102(Token token) throws SemanticError {
+      for (String id : tabelaSimbolos.keySet()) {
+         if (!variaveisUsadas.contains(id)) {
+            throw new SemanticError(id + " identificador declarado, não utilizado", token.getPosition());
+         }
+      }
       codigoObjeto.append("ret\n");
       codigoObjeto.append("}\n");
       codigoObjeto.append("}");
@@ -150,32 +144,42 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
       codigoObjeto.append(".locals (" + tipo + "[] " + identificador + ") \n");
       codigoObjeto.append("ldc.i4 " + tamanho + "\n");
       codigoObjeto.append("newarr [mscorlib]System." + getTipoCLR(tipo) + "\n");
-      codigoObjeto.append("stloc" + identificador + "\n");
+      codigoObjeto.append("stloc " + identificador + "\n");
 
 
    }
 
    private void acao106(){
+      variaveisUsadas.add(identificador);
       String tipo = pilhaTipos.pop();
-      if ("int64".equals((tipo))) {
+      if ("int64".equals(getTipo(identificador))) {
          codigoObjeto.append("conv.i8\n");
+      }
+
+      int tamanho = tabelaSimbolos.getOrDefault(identificador, 0);
+      if (tamanho == 0) {
+         codigoObjeto.append("stloc " + identificador + "\n");
+      } else {
+         codigoObjeto.append(getStelem(getTipo(identificador)) + "\n");
       }
    }
 
    private void acao107(){
+
       codigoObjeto.append("ldloc " + identificador + "\n");
    }
 
    private void acao108(){
+      variaveisUsadas.add(identificador);
       String tipo = getTipo(identificador);
-      codigoObjeto.append("call string [mscorlib]SYstem.Int64::Parse(string)\n");
+      codigoObjeto.append("call string [mscorlib]System.Console::ReadLine()\n");
 
       if ("int64".equals(tipo)) {
-         codigoObjeto.append("call int64 [mscorlib]SYstem.Int64::Parse(string)\n");
+         codigoObjeto.append("call int64 [mscorlib]System.Int64::Parse(string)\n");
       } else if("float64".equals(tipo)) {
-         codigoObjeto.append("call float64 [mscorlib]SYstem.Double::Parse(string)\n");
+         codigoObjeto.append("call float64 [mscorlib]System.Double::Parse(string)\n");
       } else if ("bool".equals(tipo)) {
-         codigoObjeto.append("call bool [mscorlib]SYstem.Boolean::Parse(string)\n");
+         codigoObjeto.append("call bool [mscorlib]System.Boolean::Parse(string)\n");
       }
 
       int tamanho = tabelaSimbolos.getOrDefault(identificador, 0);
@@ -201,9 +205,9 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
       pilhaRotulos.push(rotulo);
 
       if ("isTrueDo".equals(token.getLexeme())) {
-         codigoObjeto.append("brfalse" + rotulo + "\n");
+         codigoObjeto.append("brfalse " + rotulo + "\n");
       } else {
-         codigoObjeto.append("brtrue" + rotulo + "\n");
+         codigoObjeto.append("brtrue " + rotulo + "\n");
       }
    }
 
@@ -234,9 +238,9 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
       pilhaRotulos.push(rotuloFim);
 
       if ("isTrueDo".equals(token.getLexeme())) {
-         codigoObjeto.append("brfalse" + rotuloFim + "\n");
+         codigoObjeto.append("brfalse " + rotuloFim + "\n");
       } else {
-         codigoObjeto.append("brtrue" + rotuloFim + "\n");
+         codigoObjeto.append("brtrue " + rotuloFim + "\n");
       }
    }
 
@@ -244,7 +248,7 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
       String rotuloFim = pilhaRotulos.pop();
       String rotuloInicio = pilhaRotulos.pop();
 
-      codigoObjeto.append("br" + rotuloInicio + "\n");
+      codigoObjeto.append("br " + rotuloInicio + "\n");
       codigoObjeto.append(rotuloFim + ":\n");
    }
 
@@ -359,13 +363,13 @@ public class Semantico extends bcc.furb.br.services.gals.Semantico {
 
       if (tamanho == 0) {
          pilhaTipos.push(tipo);
-         codigoObjeto.append("ldloc" + id + "\n");
+         codigoObjeto.append("ldloc " + id + "\n");
          if ("int64".equals(tipo)) {
             codigoObjeto.append("conv.r8\n");
          }
       } else {
          pilhaVetores.push(id);
-         codigoObjeto.append("ldloc" + id + "\n");
+         codigoObjeto.append("ldloc " + id + "\n");
       }
    }
 
